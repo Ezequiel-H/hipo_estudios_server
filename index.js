@@ -15,7 +15,13 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
   console.log(req.body);
-  res.send({ transaction: 'error', error: 'WrongPassword' });
+
+  res.send({
+    token: 'aaaaaa',
+    usuario: {
+      nombre: 'carlos', apellido: 'perez', prefijo: 'aa', intereses: 'hhaa',
+    },
+  });
 });
 
 app.get('/health', (req, res) => {
