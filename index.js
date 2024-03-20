@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   console.log(req.body);
   console.log(req.body.email);
-  res.send({ ...req.body, transaction: 'error' });
+  res.send({ transaction: 'error', error: 'WrongPassword' });
 });
 
 app.get('/health', (req, res) => {
