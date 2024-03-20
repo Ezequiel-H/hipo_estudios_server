@@ -11,6 +11,14 @@ app.post('/', (req, res) => {
   res.send('OK')
 })
 
+app.get('/health', (req, res) => {
+  res.send('OK')
+})
+
+app.get('/healthz', (req, res) => {
+  res.send('OK')
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
