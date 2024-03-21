@@ -17,11 +17,15 @@ app.post('/', (req, res) => {
   console.log(req.body);
 
   res.send({
-    token: 'aaaaaa',
-    usuario: {
-      nombre: 'carlos', apellido: 'perez', prefijo: 'aa', intereses: 'hhaa',
-    },
+    transaction: 'error',
   });
+
+  // res.send({
+  //   token: 'aaaaaa',
+  //   usuario: {
+  //     nombre: 'carlos', apellido: 'perez', prefijo: 'aa', intereses: 'hhaa',
+  //   },
+  // });
 });
 
 app.get('/health', (req, res) => {
