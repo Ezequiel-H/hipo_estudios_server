@@ -14,11 +14,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
+  console.log('object');
   console.log(req.body);
-
-  // res.send({
-  //   transaction: 'error',
-  // });
+  console.log('object');
 
   res.send({
     token: 'aaaaaa',
