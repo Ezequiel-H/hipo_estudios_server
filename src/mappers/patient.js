@@ -1,19 +1,26 @@
 import { parseDate } from '../utils/date.js';
 
 export const mapPatient = ({
+  email,
+  password,
   name,
   surname,
   birthdate,
   os,
   numeroAfiliado,
-  studies,
+  country,
+  phone,
 }) => ({
+  email,
+  password,
   name,
   surname,
   birthdate: parseDate(birthdate),
   os,
   numeroAfiliado,
-  studies,
+  country,
+  phone,
+  studies: [],
 });
 
 export const a = 2;

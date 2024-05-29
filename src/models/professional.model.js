@@ -1,32 +1,12 @@
 import mongoose from 'mongoose';
+import User from './user.model.js';
 
 const { Schema } = mongoose;
 
 const professionalSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  surname: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: Number,
-    required: true,
-  },
-  country: {
-    type: String,
-    required: true,
-  },
   matriculas: [{ type: String, matricula: String }],
-  // centers: [],
-}, {
-  timestamps: true,
+  centers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  patients: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
-export default mongoose.model('Professional', professionalSchema);
+export default User.discriminator('professional', professionalSchema);

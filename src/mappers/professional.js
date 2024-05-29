@@ -1,14 +1,16 @@
 export const mapProfessional = ({
+  email,
+  password,
   name,
   surname,
-  email,
   phone,
   country,
   matriculas,
 }) => ({
+  email,
+  password,
   name,
   surname,
-  email,
   phone,
   country,
   matriculas,
