@@ -1,5 +1,5 @@
 import { addStudy, getStudy } from './controllers/study.js';
-import { createPatient, getPatient } from './controllers/patient.js';
+import { addProfessionalToUser, createPatient, getPatient } from './controllers/patient.js';
 import { createProfessional, getProfessional } from './controllers/professional.js';
 import { createCenter, getCenter } from './controllers/center.js';
 
@@ -11,6 +11,7 @@ export default (app) => {
   // PATIENT
   app.get('/patient/:userId', getPatient);
   app.post('/patient/', createPatient);
+  app.post('/patient/:userId/addProfessional', addProfessionalToUser);
 
   // PROFESSIONAL
   app.get('/professional/:userId', getProfessional);
