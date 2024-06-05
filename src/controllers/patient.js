@@ -1,4 +1,3 @@
-import { catchRequest } from '../helpers/request.js';
 import { connectPatientToProfessional, createNewPatient, getPatientById } from '../interactors/patient.js';
 import { getProfessionalByEmail } from '../interactors/professional.js';
 
@@ -14,7 +13,7 @@ export const createPatient = async (req, res) => {
   res.send(newPatient);
 };
 
-export const addProfessionalToUser = async (req, res) => {
+export const patientProfesionalConnection = async (req, res) => {
   const { professionalEmail } = req.body;
   const { userId: patientId } = req.params;
 
@@ -24,11 +23,6 @@ export const addProfessionalToUser = async (req, res) => {
   if (response.updatedPatient) {
     res.send(response.updatedPatient);
   } else {
-    catchRequest({
-      err: response,
-      res,
-      message: 'Couldnt add user to professional',
-      internalCode: '1000',
-    });
+    res.send({ message: "Couldn't add professional", errorCode: '1000' });
   }
 };

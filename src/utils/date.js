@@ -18,3 +18,8 @@ export const parseDate = (dateString) => {
 
   return date;
 };
+
+export const isValidDate = (dateString) => {
+  const date = new Date(dateString);
+  return date instanceof Date && !Number.isNaN(date.getTime());
+};

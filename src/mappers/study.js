@@ -1,4 +1,4 @@
-import { parseDate } from '../utils/date.js';
+import { parseDate, isValidDate } from '../utils/date.js';
 
 export const mapStudy = ({
   type,
@@ -11,7 +11,7 @@ export const mapStudy = ({
 }) => ({
   type,
   result,
-  date: parseDate(date),
+  date: isValidDate(date) ? date : parseDate(date),
   observation,
   patient,
   professional,
