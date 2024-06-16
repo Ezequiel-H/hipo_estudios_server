@@ -1,8 +1,10 @@
 import { addStudy, getStudy } from './controllers/study.js';
-import { createPatient, getPatient, patientProfesionalConnection } from './controllers/patient.js';
-import { createProfessional, getProfessional } from './controllers/professional.js';
+import {
+  createPatient, getAllStudies, getPatient, patientProfesionalConnection,
+} from './controllers/patient.js';
+import { createProfessional, getAllPatients, getProfessional } from './controllers/professional.js';
 import { createCenter, getCenter } from './controllers/center.js';
-import { signIn } from './controllers/user.js';
+import { createUser, signIn } from './controllers/user.js';
 
 export default (app) => {
   // WEB APP
@@ -11,15 +13,18 @@ export default (app) => {
 
   // USER
   app.post('/sign_in', signIn);
+  app.post('/sign_up', createUser);
 
   // PATIENT
-  app.get('/patient/:userId', getPatient);
+  app.get('/patient/:patientId', getPatient);
   app.post('/patient/', createPatient);
-  app.post('/patient/:userId/addProfessional', patientProfesionalConnection);
+  app.post('/patient/:patientId/addProfessional', patientProfesionalConnection);
+  app.get('/patient/:patientId/studies', getAllStudies);
 
   // PROFESSIONAL
-  app.get('/professional/:userId', getProfessional);
+  app.get('/professional/:professionalId', getProfessional);
   app.post('/professional/', createProfessional);
+  app.get('/professional/:professionalId/patients', getAllPatients);
 
   // STUDY
   app.get('/study/:studyId', getStudy);

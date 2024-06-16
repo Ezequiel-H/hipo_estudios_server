@@ -15,7 +15,7 @@ export const mapPatient = ({
   password,
   name,
   surname,
-  birthdate: parseDate(birthdate),
+  birthdate: birthdate ? parseDate(birthdate) : '',
   os,
   numeroAfiliado,
   country,

@@ -2,9 +2,15 @@ import { connectPatientToProfessional, createNewPatient, getPatientById } from '
 import { getProfessionalByEmail } from '../interactors/professional.js';
 
 export const getPatient = async (req, res) => {
-  const { userId } = req.params;
-  const user = await getPatientById(userId);
-  res.send(user);
+  const { patientId } = req.params;
+  const patient = await getPatientById(patientId);
+  if (!patient) {
+    res.status(404).json({
+      error: 'Patient not found',
+      code: '1006',
+    });
+  }
+  res.send(patient);
 };
 
 export const createPatient = async (req, res) => {
@@ -15,14 +21,38 @@ export const createPatient = async (req, res) => {
 
 export const patientProfesionalConnection = async (req, res) => {
   const { professionalEmail } = req.body;
-  const { userId: patientId } = req.params;
+  const { patientId } = req.params;
 
-  const { _id: professionalId } = await getProfessionalByEmail(professionalEmail);
-  const response = await connectPatientToProfessional(patientId, professionalId);
+  const professional = await getProfessionalByEmail(professionalEmail);
 
-  if (response.updatedPatient) {
-    res.send(response.updatedPatient);
-  } else {
-    res.send({ message: "Couldn't add professional", errorCode: '1000' });
+  if (!professional?._id) {
+    res.status(404).json({
+      error: `Couldn't find professional with email: ${professionalEmail}`,
+      code: '1004',
+    });
   }
+
+  const response = await connectPatientToProfessional(patientId, professional._id);
+
+  if (!response.updatedPatient) {
+    res.status(400).json({
+      error: "Couldn't add professional",
+      code: '1000',
+    });
+  }
+  res.send(response.updatedPatient);
+};
+
+export const getAllStudies = async (req, res) => {
+  const { patientId } = req.params;
+
+  const patient = await getPatientById(patientId);
+
+  if (!patient) {
+    res.status(404).json({
+      error: "Couldn't find patient",
+      code: '1001',
+    });
+  }
+  res.send(patient.studies);
 };

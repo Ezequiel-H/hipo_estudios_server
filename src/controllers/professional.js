@@ -1,13 +1,34 @@
 import { createNewProfessional, getProfessionalById } from '../interactors/professional.js';
 
 export const getProfessional = async (req, res) => {
-  const { userId } = req.params;
-  const user = await getProfessionalById(userId);
-  res.send(user);
+  const { professionalId } = req.params;
+  const professional = await getProfessionalById(professionalId);
+  if (!professional) {
+    res.status(404).json({
+      error: "Couldn't find professional",
+      code: '1004',
+    });
+  }
+  res.send(professional);
 };
 
 export const createProfessional = async (req, res) => {
   const { body } = req;
   const newProfessional = await createNewProfessional(body);
   res.send(newProfessional);
+};
+
+export const getAllPatients = async (req, res) => {
+  const { professionalId } = req.params;
+
+  const professional = await getProfessionalById(professionalId);
+
+  if (!professional) {
+    res.status(404).json({
+      error: "Couldn't find professional",
+      code: '1002',
+    });
+  }
+
+  res.send(professional.patients);
 };
