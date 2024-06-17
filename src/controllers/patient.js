@@ -1,4 +1,6 @@
-import { connectPatientToProfessional, createNewPatient, getPatientById } from '../interactors/patient.js';
+import {
+  connectPatientToProfessional, createNewPatient, getPatientById, getPatientWithStudies,
+} from '../interactors/patient.js';
 import { getProfessionalByEmail } from '../interactors/professional.js';
 
 export const getPatient = async (req, res) => {
@@ -46,7 +48,7 @@ export const patientProfesionalConnection = async (req, res) => {
 export const getAllStudies = async (req, res) => {
   const { patientId } = req.params;
 
-  const patient = await getPatientById(patientId);
+  const patient = await getPatientWithStudies(patientId);
 
   if (!patient) {
     res.status(404).json({
