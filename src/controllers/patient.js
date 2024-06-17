@@ -58,3 +58,15 @@ export const getAllStudies = async (req, res) => {
   }
   res.send(patient.studies);
 };
+
+export const getPatientWithStudiesInfo = async (req, res) => {
+   const { patientId } = req.params;
+  const patient = await getPatientWithStudies(patientId);
+  if (!patient) {
+    res.status(404).json({
+      error: 'Patient not found',
+      code: '1006',
+    });
+  }
+  res.send(patient);
+}

@@ -1,4 +1,4 @@
-import { createNewProfessional, getProfessionalById } from '../interactors/professional.js';
+import { createNewProfessional, getProfessionalById, getAllPatientsWithInfo } from '../interactors/professional.js';
 
 export const getProfessional = async (req, res) => {
   const { professionalId } = req.params;
@@ -32,3 +32,19 @@ export const getAllPatients = async (req, res) => {
 
   res.send(professional.patients);
 };
+
+export const getAllPatientsWithInformation = async (req, res) => {
+    const { professionalId } = req.params;
+
+  const professional = await getAllPatientsWithInfo(professionalId);
+
+  if (!professional) {
+    res.status(404).json({
+      error: "Couldn't find professional",
+      code: '1002',
+    });
+  }
+
+  res.send(professional.patients);
+
+}

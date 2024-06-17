@@ -9,3 +9,9 @@ export const createNewProfessional = async (professional) => {
   const newProfessional = await Professional.create(mapProfessional(professional));
   return newProfessional;
 };
+
+export const getAllPatientsWithInfo = async (professionalId) => Professional.findById(professionalId).populate({
+  path: 'patients',
+  select: 'name surname os numeroAfiliado phone _id'
+});
+
