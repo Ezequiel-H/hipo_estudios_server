@@ -19,7 +19,6 @@ const studySchema = new Schema({
   },
   observation: {
     type: String,
-    required: true,
   },
   patient: {
     type: Schema.Types.ObjectId,
