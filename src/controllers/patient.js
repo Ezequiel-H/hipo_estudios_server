@@ -60,7 +60,7 @@ export const getAllStudies = async (req, res) => {
 };
 
 export const getPatientWithStudiesInfo = async (req, res) => {
-   const { patientId } = req.params;
+  const { patientId } = req.params;
   const patient = await getPatientWithStudies(patientId);
   if (!patient) {
     res.status(404).json({
@@ -69,4 +69,4 @@ export const getPatientWithStudiesInfo = async (req, res) => {
     });
   }
   res.send(patient);
-}
+};
